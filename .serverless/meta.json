@@ -1,0 +1,345 @@
+{
+  "/home/bdelpozo@corp.atg/Public/Jor/moneo_api_v1": {
+    "versionSfCore": null,
+    "versionFramework": "4.4.12",
+    "isWithinCompose": false,
+    "isCompose": false,
+    "composeOrgName": null,
+    "composeResolverProviders": {
+      "default-aws-credential-resolver": "<REDACTED>",
+      "sls": {
+        "instance": {
+          "credentials": "<REDACTED>",
+          "serviceConfigFile": {
+            "org": "bitconsulting",
+            "app": "moneoapiv3",
+            "service": "moneoapitest",
+            "provider": {
+              "name": "aws",
+              "runtime": "python3.12",
+              "region": "us-east-2",
+              "stage": "dev",
+              "versionFunctions": true,
+              "compiledCloudFormationTemplate": {
+                "AWSTemplateFormatVersion": "2010-09-09",
+                "Description": "The AWS CloudFormation template for this Serverless application",
+                "Resources": {
+                  "ApiLogGroup": {
+                    "Type": "AWS::Logs::LogGroup",
+                    "Properties": {
+                      "LogGroupName": "/aws/lambda/moneoapitest-dev-api"
+                    }
+                  },
+                  "IamRoleLambdaExecution": {
+                    "Type": "AWS::IAM::Role",
+                    "Properties": {
+                      "AssumeRolePolicyDocument": {
+                        "Version": "2012-10-17",
+                        "Statement": [
+                          {
+                            "Effect": "Allow",
+                            "Principal": {
+                              "Service": [
+                                "lambda.amazonaws.com"
+                              ]
+                            },
+                            "Action": [
+                              "sts:AssumeRole"
+                            ]
+                          }
+                        ]
+                      },
+                      "Policies": [
+                        {
+                          "PolicyName": {
+                            "Fn::Join": [
+                              "-",
+                              [
+                                "moneoapitest",
+                                "dev",
+                                "lambda"
+                              ]
+                            ]
+                          },
+                          "PolicyDocument": {
+                            "Version": "2012-10-17",
+                            "Statement": [
+                              {
+                                "Effect": "Allow",
+                                "Action": [
+                                  "logs:CreateLogStream",
+                                  "logs:CreateLogGroup",
+                                  "logs:TagResource"
+                                ],
+                                "Resource": [
+                                  {
+                                    "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/moneoapitest-dev*:*"
+                                  }
+                                ]
+                              },
+                              {
+                                "Effect": "Allow",
+                                "Action": [
+                                  "logs:PutLogEvents"
+                                ],
+                                "Resource": [
+                                  {
+                                    "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/moneoapitest-dev*:*:*"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        }
+                      ],
+                      "Path": "/",
+                      "RoleName": {
+                        "Fn::Join": [
+                          "-",
+                          [
+                            "moneoapitest",
+                            "dev",
+                            {
+                              "Ref": "AWS::Region"
+                            },
+                            "lambdaRole"
+                          ]
+                        ]
+                      }
+                    }
+                  }
+                },
+                "Outputs": {
+                  "ServerlessDeploymentBucketName": {
+                    "Value": "serverless-framework-deployments-us-east-2-eb860d30-8edd"
+                  }
+                }
+              }
+            },
+            "functions": {
+              "api": {
+                "handler": "lambda_function.handler",
+                "layers": [
+                  "arn:aws:lambda:us-east-2:869935111448:layer:ASGI_fastAPI:1"
+                ],
+                "events": [
+                  {
+                    "http": {
+                      "path": "/{proxy+}",
+                      "method": "ANY"
+                    }
+                  }
+                ],
+                "name": "moneoapitest-dev-api",
+                "package": {}
+              }
+            }
+          },
+          "configFileDirPath": "/home/bdelpozo@corp.atg/Public/Jor/moneo_api_v1",
+          "config": {
+            "type": "sls"
+          },
+          "options": {},
+          "stage": "dev",
+          "dashboard": null,
+          "logger": {
+            "namespace": "s:core:resolver:sls",
+            "prefix": null,
+            "prefixColor": null
+          },
+          "_credentialsPromise": "<REDACTED>"
+        },
+        "resolvers": {}
+      }
+    },
+    "composeServiceName": null,
+    "servicePath": "/home/bdelpozo@corp.atg/Public/Jor/moneo_api_v1",
+    "serviceConfigFileName": "serverless.yml",
+    "service": {
+      "org": "bitconsulting",
+      "app": "moneoapiv3",
+      "service": "moneoapitest",
+      "provider": {
+        "name": "aws",
+        "runtime": "python3.12",
+        "region": "us-east-2",
+        "stage": "dev",
+        "versionFunctions": true,
+        "compiledCloudFormationTemplate": {
+          "AWSTemplateFormatVersion": "2010-09-09",
+          "Description": "The AWS CloudFormation template for this Serverless application",
+          "Resources": {
+            "ApiLogGroup": {
+              "Type": "AWS::Logs::LogGroup",
+              "Properties": {
+                "LogGroupName": "/aws/lambda/moneoapitest-dev-api"
+              }
+            },
+            "IamRoleLambdaExecution": {
+              "Type": "AWS::IAM::Role",
+              "Properties": {
+                "AssumeRolePolicyDocument": {
+                  "Version": "2012-10-17",
+                  "Statement": [
+                    {
+                      "Effect": "Allow",
+                      "Principal": {
+                        "Service": [
+                          "lambda.amazonaws.com"
+                        ]
+                      },
+                      "Action": [
+                        "sts:AssumeRole"
+                      ]
+                    }
+                  ]
+                },
+                "Policies": [
+                  {
+                    "PolicyName": {
+                      "Fn::Join": [
+                        "-",
+                        [
+                          "moneoapitest",
+                          "dev",
+                          "lambda"
+                        ]
+                      ]
+                    },
+                    "PolicyDocument": {
+                      "Version": "2012-10-17",
+                      "Statement": [
+                        {
+                          "Effect": "Allow",
+                          "Action": [
+                            "logs:CreateLogStream",
+                            "logs:CreateLogGroup",
+                            "logs:TagResource"
+                          ],
+                          "Resource": [
+                            {
+                              "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/moneoapitest-dev*:*"
+                            }
+                          ]
+                        },
+                        {
+                          "Effect": "Allow",
+                          "Action": [
+                            "logs:PutLogEvents"
+                          ],
+                          "Resource": [
+                            {
+                              "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/moneoapitest-dev*:*:*"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                ],
+                "Path": "/",
+                "RoleName": {
+                  "Fn::Join": [
+                    "-",
+                    [
+                      "moneoapitest",
+                      "dev",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      "lambdaRole"
+                    ]
+                  ]
+                }
+              }
+            }
+          },
+          "Outputs": {
+            "ServerlessDeploymentBucketName": {
+              "Value": "serverless-framework-deployments-us-east-2-eb860d30-8edd"
+            }
+          }
+        }
+      },
+      "functions": {
+        "api": {
+          "handler": "lambda_function.handler",
+          "layers": [
+            "arn:aws:lambda:us-east-2:869935111448:layer:ASGI_fastAPI:1"
+          ],
+          "events": [
+            {
+              "http": {
+                "path": "/{proxy+}",
+                "method": "ANY"
+              }
+            }
+          ],
+          "name": "moneoapitest-dev-api",
+          "package": {}
+        }
+      }
+    },
+    "serviceRawFile": "org: bitconsulting\napp: moneoapiv3\nservice: moneoapitest\n\nprovider:\n  name: aws\n  runtime: python3.12\n  region: us-east-2\n\nfunctions:\n  api:\n    handler: lambda_function.handler\n    layers:\n      - arn:aws:lambda:us-east-2:869935111448:layer:ASGI_fastAPI:1\n    events:\n      - http:\n          path: /{proxy+}\n          method: ANY\n\n",
+    "command": [
+      "deploy"
+    ],
+    "options": {},
+    "error": {
+      "message": "No file matches include / exclude patterns",
+      "stack": "ServerlessError2: No file matches include / exclude patterns\n    at file:///home/bdelpozo@corp.atg/.serverless/releases/4.4.12/package/dist/sf-core.js:696:44214\n    at async Package.packageService (file:///home/bdelpozo@corp.atg/.serverless/releases/4.4.12/package/dist/sf-core.js:696:40401)\n    at async PluginManager.runHooks (file:///home/bdelpozo@corp.atg/.serverless/releases/4.4.12/package/dist/sf-core.js:925:9309)\n    at async PluginManager.invoke (file:///home/bdelpozo@corp.atg/.serverless/releases/4.4.12/package/dist/sf-core.js:925:10080)\n    at async PluginManager.spawn (file:///home/bdelpozo@corp.atg/.serverless/releases/4.4.12/package/dist/sf-core.js:925:10441)\n    at async before:deploy:deploy (file:///home/bdelpozo@corp.atg/.serverless/releases/4.4.12/package/dist/sf-core.js:696:46684)\n    at async PluginManager.runHooks (file:///home/bdelpozo@corp.atg/.serverless/releases/4.4.12/package/dist/sf-core.js:925:9309)\n    at async PluginManager.invoke (file:///home/bdelpozo@corp.atg/.serverless/releases/4.4.12/package/dist/sf-core.js:925:10021)\n    at async PluginManager.run (file:///home/bdelpozo@corp.atg/.serverless/releases/4.4.12/package/dist/sf-core.js:925:10811)\n    at async Serverless.run (file:///home/bdelpozo@corp.atg/.serverless/releases/4.4.12/package/dist/sf-core.js:932:10731)",
+      "code": "NO_MATCHED_FILES"
+    },
+    "params": {},
+    "machineId": "684432c920e13c2afba926323c76c62c",
+    "stage": "dev",
+    "accessKeyV2": "<REDACTED>",
+    "accessKeyV1": "<REDACTED>",
+    "orgId": "3d7271fe-172c-46b6-a96e-af2057e40d9a",
+    "orgName": "bitconsulting",
+    "userId": "R1NfYcxDZ9hwWSsHtV",
+    "dashboard": {
+      "isEnabledForService": true,
+      "requiredAuthentication": false,
+      "orgFeaturesInUse": {
+        "providers": false,
+        "monitoring": false
+      },
+      "orgObservabilityIntegrations": null,
+      "serviceAppId": "fgfTXRLN8vzQJWnFCk",
+      "serviceProvider": null,
+      "instanceParameters": null
+    },
+    "userName": "bitconsulting",
+    "subscription": null,
+    "userEmail": "branzelweb1@gmail.com",
+    "serviceProviderAwsRegion": "us-east-2",
+    "serviceProviderAwsCredentials": "<REDACTED>",
+    "serviceProviderAwsAccountId": "869935111448",
+    "projectType": "traditional",
+    "versionSf": "4.4.12",
+    "serviceProviderAwsCfStackName": "moneoapitest-dev",
+    "serviceUniqueId": null,
+    "serviceProviderAwsCfStackId": null,
+    "serviceProviderAwsCfStackCreated": null,
+    "serviceProviderAwsCfStackUpdated": null,
+    "serviceProviderAwsCfStackStatus": null,
+    "serviceProviderAwsCfStackOutputs": null
+  },
+  "unknown": {
+    "versionSfCore": null,
+    "versionFramework": "4.4.12",
+    "isWithinCompose": false,
+    "composeOrgName": null,
+    "composeServiceName": null,
+    "command": [],
+    "options": {},
+    "error": null,
+    "machineId": "684432c920e13c2afba926323c76c62c",
+    "serviceProviderAwsCfStackId": null,
+    "serviceProviderAwsCfStackCreated": null,
+    "serviceProviderAwsCfStackUpdated": null,
+    "serviceProviderAwsCfStackStatus": null,
+    "serviceProviderAwsCfStackOutputs": null
+  }
+}
